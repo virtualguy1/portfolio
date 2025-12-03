@@ -22,6 +22,13 @@ export interface BlogPost {
   link: string;
 }
 
+export interface MDXPost {
+  slug: string;
+  title: string;
+  publishedAt: string;
+  summary: string;
+}
+
 export interface ProjectItem {
   title: string;
   description: string;

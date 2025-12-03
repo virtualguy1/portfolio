@@ -7,7 +7,7 @@ export const PORTFOLIO_DATA: ProfileData = {
   navLinks: [
     { label: "home", url: "/" },
     { label: "projects", url: "/projects" },
-    { label: "blogs", url: "/blogs" },
+    { label: "blog", url: "/blog" },
     { label: "github", url: "https://github.com/virtualguy1" },
 
   ],

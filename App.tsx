@@ -5,6 +5,8 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { Home } from './components/Home';
 import { Projects } from './components/Projects';
+import { BlogList } from './components/BlogList';
+import { BlogPost } from './components/BlogPost';
 
 const App: React.FC = () => {
   return (
@@ -16,6 +18,8 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Home data={PORTFOLIO_DATA} />} />
             <Route path="/projects" element={<Projects projects={PORTFOLIO_DATA.projects} />} />
+            <Route path="/blog" element={<BlogList />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
           </Routes>
 
           <Footer
