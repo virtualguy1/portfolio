@@ -3,14 +3,14 @@ import { useParams, Link } from 'react-router-dom';
 import { MDXProvider } from '@mdx-js/react';
 
 const components = {
-    h1: (props: any) => <h1 className="text-2xl md:text-3xl font-bold mt-8 mb-4 text-terminal-highlight" {...props} />,
-    h2: (props: any) => <h2 className="text-xl md:text-2xl font-bold mt-8 mb-4 text-terminal-highlight" {...props} />,
-    h3: (props: any) => <h3 className="text-lg md:text-xl font-bold mt-6 mb-3 text-terminal-highlight" {...props} />,
+    h1: (props: any) => <h1 className="text-2xl md:text-3xl font-bold mt-8 mb-4 text-terminal-green" {...props} />,
+    h2: (props: any) => <h2 className="text-xl md:text-2xl font-bold mt-8 mb-4 text-terminal-green" {...props} />,
+    h3: (props: any) => <h3 className="text-lg md:text-xl font-bold mt-6 mb-3 text-terminal-green" {...props} />,
     p: (props: any) => <p className="mb-4 leading-relaxed text-gray-300" {...props} />,
     ul: (props: any) => <ul className="list-disc list-inside mb-4 space-y-2 text-gray-300" {...props} />,
     ol: (props: any) => <ol className="list-decimal list-inside mb-4 space-y-2 text-gray-300" {...props} />,
     li: (props: any) => <li className="ml-4" {...props} />,
-    a: (props: any) => <a className="text-terminal-highlight hover:underline" {...props} />,
+    a: (props: any) => <a className="text-terminal-green hover:underline" {...props} />,
     blockquote: (props: any) => <blockquote className="border-l-4 border-terminal-green pl-4 italic my-4 text-gray-400" {...props} />,
     code: (props: any) => <code className="bg-gray-800 rounded px-1 py-0.5 text-sm font-mono text-terminal-green" {...props} />,
     pre: (props: any) => <pre className="bg-gray-900 rounded p-4 overflow-x-auto mb-4 border border-gray-800" {...props} />,
@@ -60,7 +60,7 @@ export const BlogPost: React.FC = () => {
             </Link>
 
             <header className="mb-8 pb-8 border-b border-gray-800">
-                <h1 className="text-3xl md:text-4xl font-bold mb-4 text-terminal-highlight">
+                <h1 className="text-3xl md:text-4xl font-bold mb-4 text-terminal-green">
                     {meta?.title}
                 </h1>
                 <div className="flex items-center text-sm text-gray-500 font-mono">
