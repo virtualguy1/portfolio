@@ -27,7 +27,7 @@ export const BlogList: React.FC = () => {
 
     return (
         <div className="animate-fade-in">
-            <h2 className="text-xl md:text-2xl font-bold mb-8 text-terminal-highlight">
+            <h2 className="text-xl font-bold mb-6 text-terminal-green border-b border-gray-800 pb-2">
                 <span className="text-terminal-green mr-2">$</span>
                 ls ./blog
             </h2>
