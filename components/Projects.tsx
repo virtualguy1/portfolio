@@ -9,9 +9,10 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
     return (
         <section className="mb-12 animate-fade-in">
             <h2 className="text-xl font-bold text-terminal-green mb-6 border-b border-gray-800 pb-2">
-                Projects
+                <span className="text-terminal-green mr-2">$</span>
+                cd ./Projects
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6">
                 {projects.map((project, index) => (
                     <div
                         key={index}

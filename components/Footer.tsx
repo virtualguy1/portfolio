@@ -8,7 +8,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ links, copyrightName }) => {
   return (
-    <footer className="mt-20 pt-8 pb-12 border-t border-gray-900 text-center">
+    <footer className="mt-10 pt-8 pb-12 border-t border-gray-900 text-center">
       <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-6">
         {links.map((link, index) => (
           <a

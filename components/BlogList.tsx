@@ -29,7 +29,7 @@ export const BlogList: React.FC = () => {
         <div className="animate-fade-in">
             <h2 className="text-xl font-bold mb-6 text-terminal-green border-b border-gray-800 pb-2">
                 <span className="text-terminal-green mr-2">$</span>
-                ls ./blog
+                ls ./Blog
             </h2>
             <div className="space-y-8">
                 {posts.map((post) => (
