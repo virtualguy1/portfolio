@@ -21,7 +21,7 @@ export const Footer: React.FC<FooterProps> = ({ links, copyrightName }) => {
         ))}
       </div>
       <p className="text-gray-500 text-xs font-mono">
-        &copy; 2025, {copyrightName}. <span className="text-terminal-green">Be kind</span>, <span className="text-terminal-green">code</span>, <span className="text-terminal-green">inspire</span>.
+        &copy; 2025, {copyrightName}. <span className="text-terminal-green">Keep calm, code, deploy, and debug.</span>
       </p>
     </footer>
   );

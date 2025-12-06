@@ -52,7 +52,7 @@ export const PORTFOLIO_DATA: ProfileData = {
     },
     {
       category: "Frameworks/ libraries",
-      items: "React.js, Tailwind CSS, Node.js, Express.js, Spring, Spring Boot, Spring Batch, Apache POI"
+      items: "React.js, Tailwind CSS, Node.js, Express.js, Spring, Spring Boot, Spring Batch"
     },
     {
       category: "Databases",
