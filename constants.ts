@@ -73,7 +73,7 @@ export const PORTFOLIO_DATA: ProfileData = {
   ],
   socials: [
     { label: "email", url: "mailto:abhinavrx97@gmail.com" },
-    { label: "linkedin", url: "https://linkedin.com/in/abhinavrx97" },
-    { label: "x", url: "https://twitter.com/abhinavrx97" },
+    { label: "linkedin", url: "https://www.linkedin.com/in/abhinavrx/" },
+    { label: "x", url: "https://x.com/ASrivastav97" },
   ]
 };
