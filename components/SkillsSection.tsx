@@ -9,7 +9,8 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ skills }) => {
   return (
     <section className="mb-12">
       <h2 className="text-xl font-bold text-terminal-green mb-6 border-b border-gray-800 pb-2">
-        Skills
+        <span className="text-terminal-green mr-2">$</span>
+        echo $SKILLS
       </h2>
       <div className="space-y-3">
         {skills.map((skill, index) => (
