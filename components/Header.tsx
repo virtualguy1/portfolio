@@ -1,6 +1,8 @@
-import React from 'react';
-import { NavLink as RouterNavLink } from 'react-router';
-import { NavLink } from '../types';
+import React from "react";
+import { NavLink as RouterNavLink } from "react-router";
+import { motion } from "framer-motion";
+import { NavLink } from "../types";
+import { staggerContainer, fadeInDown } from "./animations";
 
 interface HeaderProps {
   links: NavLink[];
@@ -8,36 +10,51 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ links }) => {
   return (
-    <nav className="flex justify-center gap-4 md:gap-6 py-8 text-sm md:text-base">
+    <motion.nav
+      className="flex justify-center gap-4 md:gap-6 py-8 text-sm md:text-base"
+      variants={staggerContainer}
+      initial="hidden"
+      animate="visible"
+    >
       {links.map((link, index) => {
-        const isExternal = link.url.startsWith('http') || link.url.startsWith('mailto');
+        const isExternal =
+          link.url.startsWith("http") || link.url.startsWith("mailto");
 
         if (isExternal) {
           return (
-            <a
+            <motion.a
               key={index}
               href={link.url}
               className="text-gray-400 hover:text-terminal-highlight hover:underline transition-colors font-mono"
               target="_blank"
               rel="noopener noreferrer"
+              variants={fadeInDown}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
               {link.label}
-            </a>
+            </motion.a>
           );
         }
 
         return (
-          <RouterNavLink
+          <motion.div
             key={index}
-            to={link.url}
-            className={({ isActive }) =>
-              `text-gray-400 hover:text-terminal-highlight hover:underline transition-colors font-mono ${isActive ? 'text-terminal-highlight underline' : ''}`
-            }
+            variants={fadeInDown}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
           >
-            {link.label}
-          </RouterNavLink>
+            <RouterNavLink
+              to={link.url}
+              className={({ isActive }) =>
+                `text-gray-400 hover:text-terminal-highlight hover:underline transition-colors font-mono ${isActive ? "text-terminal-highlight underline" : ""}`
+              }
+            >
+              {link.label}
+            </RouterNavLink>
+          </motion.div>
         );
       })}
-    </nav>
+    </motion.nav>
   );
 };
