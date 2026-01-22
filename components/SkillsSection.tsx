@@ -1,91 +1,56 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { SkillCategory } from "../types";
-import {
-  staggerContainer,
-  fadeInUp,
-  slideInFromLeft,
-  viewportOnce,
-} from "./animations";
+import { Box } from "./ui/Box";
 
 interface SkillsSectionProps {
   skills: SkillCategory[];
 }
 
 export const SkillsSection: React.FC<SkillsSectionProps> = ({ skills }) => {
-  const sectionHeaderVariants = {
-    hidden: { opacity: 0, x: -30 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const skillItemVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.4,
-        ease: "easeOut",
-      },
-    },
-  };
-
   return (
-    <motion.section
-      className="mb-12"
-      initial="hidden"
-      whileInView="visible"
-      viewport={viewportOnce}
-    >
-      <motion.h2
-        className="text-xl font-bold text-terminal-green mb-6 border-b border-gray-800 pb-2"
-        variants={sectionHeaderVariants}
-      >
-        <span className="text-terminal-green mr-2">$</span>
-        echo $SKILLS
-      </motion.h2>
-
-      <motion.div
-        className="space-y-3"
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={viewportOnce}
-      >
-        {skills.map((skill, index) => (
-          <motion.div
-            key={index}
-            className="text-sm leading-relaxed"
-            variants={skillItemVariants}
-            whileHover={{
-              x: 8,
-              transition: { duration: 0.2, ease: "easeOut" },
-            }}
-          >
-            <motion.span
-              className="font-bold text-gray-200"
-              whileHover={{ color: "#4ade80" }}
-              transition={{ duration: 0.2 }}
-            >
-              {skill.category}:{" "}
-            </motion.span>
-            <motion.span
-              className="text-gray-400"
-              whileHover={{ color: "#d1d5db" }}
-              transition={{ duration: 0.2 }}
-            >
-              {skill.items}
-            </motion.span>
-          </motion.div>
-        ))}
-      </motion.div>
-    </motion.section>
+    <section className="mb-8">
+      <Box title="cat skills.txt">
+        <div className="overflow-x-auto">
+          <table className="w-full font-mono text-sm border-collapse">
+            <thead>
+              <tr className="border-b border-tui-border">
+                <th className="text-left py-2 pr-4 text-tui-cyan font-bold">
+                  Category
+                </th>
+                <th className="text-left py-2 text-tui-cyan font-bold">
+                  Technologies
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {skills.map((skill, index) => (
+                <tr 
+                  key={index} 
+                  className={`${
+                    index !== skills.length - 1 ? 'border-b border-tui-border/30' : ''
+                  } hover:bg-tui-border/10 transition-colors`}
+                >
+                  <td className="py-3 pr-4 align-top text-tui-magenta font-semibold whitespace-nowrap">
+                    {skill.category}
+                  </td>
+                  <td className="py-3 text-tui-fg">
+                    <div className="flex flex-wrap gap-2">
+                      {skill.items.split(',').map((item, idx) => (
+                        <span 
+                          key={idx}
+                          className="px-2 py-1 bg-tui-border/20 text-tui-orange rounded text-xs border border-tui-border hover:border-tui-cyan hover:text-tui-cyan transition-colors"
+                        >
+                          {item.trim()}
+                        </span>
+                      ))}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Box>
+    </section>
   );
 };

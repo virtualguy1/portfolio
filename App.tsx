@@ -35,8 +35,8 @@ const AnimatedRoutes: React.FC = () => {
 const App: React.FC = () => {
   return (
     <Router>
-      <div className="min-h-screen bg-terminal-bg text-terminal-text selection:bg-terminal-green selection:text-black font-sans px-6 md:px-12 lg:px-0">
-        <div className="max-w-[700px] mx-auto">
+      <div className="min-h-screen bg-tui-bg text-tui-fg selection:bg-tui-cyan selection:text-tui-bg font-mono px-4 md:px-8 lg:px-0">
+        <div className="max-w-[800px] mx-auto">
           <Header links={PORTFOLIO_DATA.navLinks} />
 
           <AnimatedRoutes />

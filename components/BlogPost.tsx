@@ -5,119 +5,61 @@ import { motion } from "framer-motion";
 
 const components = {
   h1: (props: any) => (
-    <motion.h1
-      className="text-2xl md:text-3xl font-bold mt-8 mb-4 text-terminal-green"
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4 }}
+    <h1
+      className="text-2xl md:text-3xl font-bold mt-8 mb-4 text-tui-cyan border-b border-tui-border pb-2"
       {...props}
     />
   ),
   h2: (props: any) => (
-    <motion.h2
-      className="text-xl md:text-2xl font-bold mt-8 mb-4 text-terminal-green"
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4 }}
+    <h2
+      className="text-xl md:text-2xl font-bold mt-8 mb-4 text-tui-magenta"
       {...props}
     />
   ),
   h3: (props: any) => (
-    <motion.h3
-      className="text-lg md:text-xl font-bold mt-6 mb-3 text-terminal-green"
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4 }}
+    <h3
+      className="text-lg md:text-xl font-bold mt-6 mb-3 text-tui-green"
       {...props}
     />
   ),
   p: (props: any) => (
-    <motion.p
-      className="mb-4 leading-relaxed text-gray-300"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4 }}
-      {...props}
-    />
+    <p className="mb-4 leading-relaxed text-tui-fg" {...props} />
   ),
   ul: (props: any) => (
-    <motion.ul
-      className="list-disc list-inside mb-4 space-y-2 text-gray-300"
-      initial={{ opacity: 0, x: -10 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4 }}
-      {...props}
-    />
+    <ul className="list-disc list-inside mb-4 space-y-2 text-tui-fg" {...props} />
   ),
   ol: (props: any) => (
-    <motion.ol
-      className="list-decimal list-inside mb-4 space-y-2 text-gray-300"
-      initial={{ opacity: 0, x: -10 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4 }}
-      {...props}
-    />
+    <ol className="list-decimal list-inside mb-4 space-y-2 text-tui-fg" {...props} />
   ),
   li: (props: any) => <li className="ml-4" {...props} />,
   a: (props: any) => (
-    <motion.a
-      className="text-terminal-green hover:underline"
-      whileHover={{ color: "#4ade80" }}
+    <a
+      className="text-tui-cyan hover:text-tui-green hover:underline transition-colors"
       {...props}
     />
   ),
   blockquote: (props: any) => (
-    <motion.blockquote
-      className="border-l-4 border-terminal-green pl-4 italic my-4 text-gray-400"
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4 }}
+    <blockquote
+      className="border-l-2 border-tui-muted pl-4 italic my-4 text-tui-muted font-mono"
       {...props}
     />
   ),
   code: (props: any) => (
     <code
-      className="bg-gray-800 rounded px-1 py-0.5 text-sm font-mono text-terminal-green"
+      className="bg-tui-border px-1 py-0.5 text-sm font-mono text-tui-orange"
       {...props}
     />
   ),
   pre: (props: any) => (
-    <motion.pre
-      className="bg-gray-900 rounded p-4 overflow-x-auto mb-4 border border-gray-800"
-      initial={{ opacity: 0, scale: 0.98 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4 }}
+    <pre
+      className="bg-tui-border p-4 overflow-x-auto mb-4 border border-tui-border rounded"
       {...props}
     />
   ),
   img: (props: any) => (
-    <motion.img
-      className="rounded-lg my-6 max-w-full border border-gray-800"
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      {...props}
-    />
+    <img className="my-6 max-w-full border border-tui-border" {...props} />
   ),
-  hr: (props: any) => (
-    <motion.hr
-      className="border-gray-800 my-8"
-      initial={{ scaleX: 0 }}
-      whileInView={{ scaleX: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      {...props}
-    />
-  ),
+  hr: (props: any) => <hr className="border-tui-border my-8" {...props} />,
 };
 
 export const BlogPost: React.FC = () => {
@@ -141,143 +83,57 @@ export const BlogPost: React.FC = () => {
     }
   }, [slug]);
 
-  const loadingPulseVariants = {
-    animate: {
-      opacity: [0.5, 1, 0.5],
-      transition: {
-        duration: 1.5,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    },
-  };
-
   if (!Content) {
     return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-      >
-        <motion.div
-          className="h-8 bg-gray-800 rounded w-3/4 mb-4"
-          variants={loadingPulseVariants}
-          animate="animate"
-        />
-        <motion.div
-          className="h-4 bg-gray-800 rounded w-1/4 mb-8"
-          variants={loadingPulseVariants}
-          animate="animate"
-        />
-        <div className="space-y-4">
-          <motion.div
-            className="h-4 bg-gray-800 rounded"
-            variants={loadingPulseVariants}
-            animate="animate"
-          />
-          <motion.div
-            className="h-4 bg-gray-800 rounded"
-            variants={loadingPulseVariants}
-            animate="animate"
-          />
-          <motion.div
-            className="h-4 bg-gray-800 rounded w-5/6"
-            variants={loadingPulseVariants}
-            animate="animate"
-          />
-        </div>
-      </motion.div>
+      <div className="font-mono text-tui-muted text-sm">
+        Loading post...
+      </div>
     );
   }
 
   return (
     <motion.div
       className="max-w-none"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
     >
-      {/* Animated back button */}
+      {/* Back button */}
       <Link
         to="/blog"
-        className="inline-flex items-center text-sm text-gray-500 hover:text-terminal-highlight mb-8 transition-colors font-mono group"
+        className="inline-flex items-center text-sm text-tui-cyan hover:text-tui-green mb-6 transition-colors font-mono"
       >
-        <motion.span
-          className="mr-2"
-          initial={{ x: 0 }}
-          whileHover={{ x: -5 }}
-          transition={{ type: "spring", stiffness: 400, damping: 17 }}
-        >
-          ←
-        </motion.span>
-        <motion.span
-          whileHover={{ color: "#4ade80" }}
-          transition={{ duration: 0.2 }}
-        >
-          cd ..
-        </motion.span>
+        <span className="mr-2">←</span>
+        cd ../blog
       </Link>
 
-      {/* Header with staggered animation */}
-      <motion.header
-        className="mb-8 pb-8 border-b border-gray-800"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.1, duration: 0.4 }}
-      >
-        <motion.h1
-          className="text-3xl md:text-4xl font-bold mb-4 text-terminal-green"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15, duration: 0.5, ease: "easeOut" }}
-        >
+      {/* Header */}
+      <header className="mb-8 pb-4 border-b border-tui-border">
+        <h1 className="text-2xl md:text-3xl font-bold mb-2 text-tui-cyan font-mono">
           {meta?.title}
-        </motion.h1>
-        <motion.div
-          className="flex items-center text-sm text-gray-500 font-mono"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.25, duration: 0.4 }}
-        >
+        </h1>
+        <div className="flex items-center text-sm text-tui-yellow font-mono">
           <time dateTime={meta?.publishedAt}>{meta?.publishedAt}</time>
-        </motion.div>
-      </motion.header>
+        </div>
+      </header>
 
-      {/* Content with reveal animation */}
-      <motion.div
-        className="prose prose-invert prose-lg max-w-none"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
-      >
+      {/* Content */}
+      <div className="prose prose-invert prose-lg max-w-none">
         <MDXProvider components={components}>
           <Content />
         </MDXProvider>
-      </motion.div>
+      </div>
 
-      {/* Bottom fade-in navigation hint */}
-      <motion.div
-        className="mt-12 pt-8 border-t border-gray-800"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.2, duration: 0.4 }}
-      >
+      {/* Bottom navigation */}
+      <div className="mt-12 pt-6 border-t border-tui-border">
         <Link
           to="/blog"
-          className="inline-flex items-center text-sm text-gray-500 hover:text-terminal-highlight transition-colors font-mono group"
+          className="inline-flex items-center text-sm text-tui-cyan hover:text-tui-green transition-colors font-mono"
         >
-          <motion.span
-            className="mr-2"
-            whileHover={{ x: -5 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
-            ←
-          </motion.span>
+          <span className="mr-2">←</span>
           Back to all posts
         </Link>
-      </motion.div>
+      </div>
     </motion.div>
   );
 };

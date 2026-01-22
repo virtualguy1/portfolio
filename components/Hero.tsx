@@ -1,5 +1,6 @@
 import React from "react";
-import { motion, Variants } from "framer-motion";
+import { Box } from "./ui/Box";
+import { useGlitchTyping } from "../hooks/useGlitchTyping";
 
 interface HeroProps {
   name: string;
@@ -8,95 +9,54 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ name, title, summary }) => {
-  // Calculate animation duration based on name length
-  const nameDuration = name.length * 0.08;
+  // Glitched typing effect for name
+  const { displayText: displayName, isComplete } = useGlitchTyping({
+    text: name,
+    typingSpeed: 80,
+    glitchChance: 0.8,
+  });
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 1 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const letterVariants: Variants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.1,
-        ease: "easeOut" as const,
-      },
-    },
-  };
-
-  const cursorVariants: Variants = {
-    blink: {
-      opacity: [1, 0],
-      transition: {
-        duration: 0.7,
-        repeat: Infinity,
-        repeatType: "reverse" as const,
-        ease: "easeInOut" as const,
-      },
-    },
-  };
-
-  const summaryVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut" as const,
-        delay: nameDuration + 0.5,
-      },
-    },
-  };
+  // Split summary into lines for chevron display
+  const summaryLines = summary.split(". ").filter((line) => line.trim());
 
   return (
-    <section className="mb-12 text-left">
-      <div className="flex items-center mb-4">
-        <motion.h1
-          className="text-3xl md:text-4xl font-bold text-gray-100 inline-flex flex-wrap"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {name.split("").map((char, index) => (
-            <motion.span
-              key={index}
-              variants={letterVariants}
-              className={char === " " ? "mr-2" : ""}
-            >
-              {char === " " ? "\u00A0" : char}
-            </motion.span>
-          ))}
-        </motion.h1>
-        <motion.span
-          className="inline-block w-[3px] h-8 md:h-10 bg-terminal-green ml-1"
-          variants={cursorVariants}
-          initial={{ opacity: 0 }}
-          animate="blink"
-          transition={{
-            delay: nameDuration + 0.3,
-          }}
-        />
-      </div>
+    <section className="mb-8">
+      <Box title="whoami">
+        <div className="space-y-4">
+          {/* Name with glitch effect */}
+          <h1 className="text-2xl md:text-3xl font-bold text-tui-fg">
+            {displayName}
+            {!isComplete && (
+              <span className="inline-block w-[3px] h-7 bg-tui-green ml-1 animate-pulse"></span>
+            )}
+          </h1>
 
-      <motion.p
-        className="text-gray-400 leading-relaxed text-sm md:text-base max-w-2xl"
-        variants={summaryVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {summary}
-      </motion.p>
+          {/* ASCII underline - show when typing is complete */}
+          {isComplete && (
+            <div className="text-tui-border">{"─".repeat(name.length)}</div>
+          )}
+
+          {/* Title - show after name is complete */}
+          {isComplete && (
+            <div className="text-tui-magenta text-lg">{title}</div>
+          )}
+
+          {/* Summary with chevrons */}
+          {isComplete && (
+            <div className="space-y-2 text-tui-muted text-sm md:text-base">
+              {summaryLines.map((line, idx) => (
+                <div key={idx} className="flex gap-2">
+                  <span className="text-tui-green flex-shrink-0">&gt;</span>
+                  <span>
+                    {line.trim()}
+                    {idx < summaryLines.length - 1 ? "." : ""}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </Box>
     </section>
   );
 };
