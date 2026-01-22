@@ -21,7 +21,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
                   <h3 className="text-base md:text-lg font-bold text-tui-magenta">
                     {exp.role}
                   </h3>
-                  <span className="text-tui-cyan text-sm md:text-base">
+                  <span className="text-tui-cyan text-base md:text-lg">
                     @ {exp.company}
                   </span>
                 </div>
