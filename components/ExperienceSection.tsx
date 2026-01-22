@@ -42,11 +42,6 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
                 ))}
               </ul>
 
-              {/* Skills */}
-              <div className="text-tui-orange text-xs font-mono pt-1">
-                # {exp.skills}
-              </div>
-
               {/* Separator (except for last item) */}
               {index < experiences.length - 1 && (
                 <div className="text-tui-border pt-4 overflow-hidden whitespace-nowrap">
