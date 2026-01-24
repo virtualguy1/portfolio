@@ -21,6 +21,7 @@
     "@vitejs/plugin-react": "^5.0.0",
     "baseline-browser-mapping": "^2.9.17",
     "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.1",
     "remark-mdx-frontmatter": "^5.2.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"

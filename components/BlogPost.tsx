@@ -26,10 +26,16 @@ const components = {
     <p className="mb-4 leading-relaxed text-tui-fg" {...props} />
   ),
   ul: (props: any) => (
-    <ul className="list-disc list-inside mb-4 space-y-2 text-tui-fg" {...props} />
+    <ul
+      className="list-disc list-inside mb-4 space-y-2 text-tui-fg"
+      {...props}
+    />
   ),
   ol: (props: any) => (
-    <ol className="list-decimal list-inside mb-4 space-y-2 text-tui-fg" {...props} />
+    <ol
+      className="list-decimal list-inside mb-4 space-y-2 text-tui-fg"
+      {...props}
+    />
   ),
   li: (props: any) => <li className="ml-4" {...props} />,
   a: (props: any) => (
@@ -60,6 +66,31 @@ const components = {
     <img className="my-6 max-w-full border border-tui-border" {...props} />
   ),
   hr: (props: any) => <hr className="border-tui-border my-8" {...props} />,
+  table: (props: any) => (
+    <div className="overflow-x-auto my-6">
+      <table
+        className="w-full border-collapse border border-tui-border font-mono text-sm"
+        {...props}
+      />
+    </div>
+  ),
+  thead: (props: any) => <thead className="bg-tui-border" {...props} />,
+  tbody: (props: any) => <tbody {...props} />,
+  tr: (props: any) => (
+    <tr
+      className="border-b border-tui-border hover:bg-tui-border/50 transition-colors"
+      {...props}
+    />
+  ),
+  th: (props: any) => (
+    <th
+      className="border border-tui-border px-4 py-2 text-left font-bold text-tui-cyan"
+      {...props}
+    />
+  ),
+  td: (props: any) => (
+    <td className="border border-tui-border px-4 py-2 text-tui-fg" {...props} />
+  ),
 };
 
 export const BlogPost: React.FC = () => {
@@ -85,9 +116,7 @@ export const BlogPost: React.FC = () => {
 
   if (!Content) {
     return (
-      <div className="font-mono text-tui-muted text-sm">
-        Loading post...
-      </div>
+      <div className="font-mono text-tui-muted text-sm">Loading post...</div>
     );
   }
 
