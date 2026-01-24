@@ -1,0 +1,97 @@
+---
+title: 'DNF Cheat Sheet'
+publishedAt: '2026-01-01'
+summary: 'A comprehensive guide for DNF, the default package manager for Fedora.'
+---
+
+# DNF (Dandified YUM) Cheat Sheet
+
+A comprehensive guide for DNF, the default package manager for Fedora.
+
+---
+
+## 1. Basic Package Management
+These are the essential commands you will use daily for installing and removing software.
+
+| Command | Description |
+| :--- | :--- |
+| `sudo dnf install <package>` | Installs a specific package. |
+| `sudo dnf remove <package>` | Removes a package. |
+| `sudo dnf reinstall <package>` | Reinstalls the current version of a package. |
+| `sudo dnf autoremove` | Removes dependencies that are no longer needed (orphaned packages). |
+| `sudo dnf distro-sync` | Synchronizes installed packages to the latest available versions (useful after upgrades). |
+
+> **Pro Tip:** Add `-y` to any command (e.g., `dnf install <package> -y`) to automatically answer "yes" to all prompts.
+
+---
+
+## 2. Updates & System Maintenance
+Keep your Fedora system secure and up-to-date.
+
+| Command | Description |
+| :--- | :--- |
+| `sudo dnf check-update` | Checks for available updates without installing them. |
+| `sudo dnf upgrade` | Updates all installed packages to the latest version. |
+| `sudo dnf upgrade --refresh` | Forces a metadata refresh before running the upgrade. |
+| `sudo dnf clean all` | Removes cached data (packages, metadata) to free up space or fix sync errors. |
+| `sudo dnf makecache` | Manually downloads and caches metadata for all enabled repositories. |
+
+---
+
+## 3. Searching & Information
+Use these commands when you don't know the exact package name or need details about what a package does.
+
+| Command | Description |
+| :--- | :--- |
+| `dnf search <term>` | Searches package names and summaries for a specific term. |
+| `dnf list installed` | Lists all packages currently installed on your system. |
+| `dnf list available` | Lists all packages available for installation from enabled repos. |
+| `dnf info <package>` | Displays detailed information (version, size, license, description) about a package. |
+| `dnf provides <file>` | Finds which package owns or provides a specific file/command (e.g., `dnf provides /usr/bin/ls`). |
+
+---
+
+## 4. Working with Groups
+Fedora bundles related software into "Groups" (e.g., "Web Server", "Development Tools") for easier installation.
+
+| Command | Description |
+| :--- | :--- |
+| `dnf group list` | Lists all available package groups. |
+| `sudo dnf group install "<group name>"` | Installs a specific group of packages (use quotes if the name has spaces). |
+| `sudo dnf group update "<group name>"` | Updates packages within a specific group. |
+| `sudo dnf group remove "<group name>"` | Removes an entire group of packages. |
+
+---
+
+## 5. History & Rollbacks
+Made a mistake? DNF keeps a transaction history allowing you to undo changes.
+
+| Command | Description |
+| :--- | :--- |
+| `dnf history` | Shows a list of past DNF transactions with IDs. |
+| `dnf history info <ID>` | Shows detailed info about a specific transaction ID. |
+| `sudo dnf history undo <ID>` | Reverts the changes made in a specific transaction ID. |
+| `sudo dnf history rollback <ID>` | Undoes all transactions performed after the specified ID. |
+
+---
+
+## 6. Repository Management
+Manage the sources from which your system downloads software.
+
+| Command | Description |
+| :--- | :--- |
+| `dnf repolist` | Lists all enabled repositories. |
+| `dnf repolist all` | Lists all repositories (both enabled and disabled). |
+| `sudo dnf config-manager --add-repo <url>` | Adds a new repository from a URL. |
+| `sudo dnf config-manager --set-enabled <repo-id>` | Enables a specific repository. |
+| `sudo dnf config-manager --set-disabled <repo-id>` | Disables a specific repository. |
+
+---
+
+## Key Flags & Shortcuts
+
+* `--refresh`: Force DNF to update its metadata before running a command.
+* `--nobest`: Install the best available version even if it doesn't meet all dependency requirements (useful if a specific dependency is broken).
+* `--allowerasing`: Allow DNF to remove installed packages to resolve dependencies during an install/upgrade.
+* `-q` **(Quiet):** Reduces output clutter.
+* `-v` **(Verbose):** Increases output detail (for debugging).
