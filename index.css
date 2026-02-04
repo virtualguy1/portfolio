@@ -1,0 +1,328 @@
+/* ============================================
+   TERMINAL PORTFOLIO - ENHANCED UI/UX STYLES
+   ============================================ */
+
+/* ============================================
+   1. CRT ATMOSPHERE EFFECTS
+   ============================================ */
+
+/* Scanlines overlay - subtle horizontal lines for CRT authenticity */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+}
+
+/* Vignette effect - soft darkening at edges */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+}
+
+/* Subtle noise texture animation */
+@keyframes noise {
+  0%, 100% { opacity: 0.02; }
+  50% { opacity: 0.04; }
+}
+
+/* Apply noise via a pseudo-element on the root container */
+#root::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9997;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  animation: noise 8s infinite ease-in-out;
+}
+
+/* ============================================
+   2. SELECTION & FOCUS STYLING
+   ============================================ */
+
+/* Terminal-style text selection */
+::selection {
+  background-color: rgba(121, 192, 255, 0.3);
+  color: #7ee787;
+}
+
+::-moz-selection {
+  background-color: rgba(121, 192, 255, 0.3);
+  color: #7ee787;
+}
+
+/* Enhanced focus states with terminal glow */
+*:focus-visible {
+  outline: 1px solid #79c0ff;
+  outline-offset: 2px;
+  box-shadow: 0 0 8px rgba(121, 192, 255, 0.4);
+}
+
+/* ============================================
+   3. LINK ENHANCEMENTS
+   ============================================ */
+
+/* Animated underline for links */
+.link-underline {
+  position: relative;
+  text-decoration: none;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* ============================================
+   4. GLOW UTILITIES
+   ============================================ */
+
+/* Cyan glow for active/hover states */
+.glow-cyan {
+  box-shadow: 0 0 10px rgba(121, 192, 255, 0.3),
+              0 0 20px rgba(121, 192, 255, 0.1);
+}
+
+/* Green glow for success/prompt */
+.glow-green {
+  box-shadow: 0 0 10px rgba(126, 231, 135, 0.3),
+              0 0 20px rgba(126, 231, 135, 0.1);
+}
+
+/* Orange glow for tags */
+.glow-orange {
+  box-shadow: 0 0 8px rgba(255, 166, 87, 0.3),
+              0 0 16px rgba(255, 166, 87, 0.1);
+}
+
+/* Magenta glow */
+.glow-magenta {
+  box-shadow: 0 0 10px rgba(210, 168, 255, 0.3),
+              0 0 20px rgba(210, 168, 255, 0.1);
+}
+
+/* Pulsing glow animation */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(121, 192, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(121, 192, 255, 0.4),
+                0 0 25px rgba(121, 192, 255, 0.2);
+  }
+}
+
+.glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* ============================================
+   5. BORDER TRACE ANIMATION
+   ============================================ */
+
+/* SVG-based border drawing animation */
+@keyframes draw-border {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.border-trace {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw-border 1s ease-out forwards;
+}
+
+/* CSS-only border trace for simple boxes */
+@keyframes border-top {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes border-right {
+  from { height: 0; }
+  to { height: 100%; }
+}
+
+@keyframes border-bottom {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes border-left {
+  from { height: 0; }
+  to { height: 100%; }
+}
+
+/* ============================================
+   6. ASCII UNDERLINE ANIMATION
+   ============================================ */
+
+@keyframes type-underline {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+.ascii-underline {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ascii-underline-animated {
+  display: inline-block;
+  overflow: hidden;
+  animation: type-underline 0.5s ease-out forwards;
+}
+
+/* ============================================
+   7. CURSOR ENHANCEMENTS
+   ============================================ */
+
+/* Terminal block cursor */
+@keyframes blink-cursor {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor-block {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.1em;
+  background-color: #7ee787;
+  animation: blink-cursor 1s step-end infinite;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+
+/* ============================================
+   8. FLICKER EFFECT (very subtle)
+   ============================================ */
+
+@keyframes subtle-flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.98; }
+  94% { opacity: 1; }
+  96% { opacity: 0.99; }
+  97% { opacity: 1; }
+}
+
+.subtle-flicker {
+  animation: subtle-flicker 4s infinite;
+}
+
+/* ============================================
+   9. REDUCED MOTION SUPPORT
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  body::before,
+  body::after,
+  #root::before {
+    display: none;
+  }
+}
+
+/* ============================================
+   10. SCROLL REVEAL UTILITIES
+   ============================================ */
+
+/* Initial hidden state for scroll reveal */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Stagger delay utilities */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+.stagger-5 { transition-delay: 0.5s; }
+
+/* ============================================
+   11. TAG HOVER ENHANCEMENTS
+   ============================================ */
+
+.tag-enhanced {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.tag-enhanced:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* ============================================
+   12. SMOOTH SCROLLING
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

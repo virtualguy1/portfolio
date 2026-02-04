@@ -4,6 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MDXPost } from "../types";
 import { AnimatedPage } from "./AnimatedPage";
 import { Box } from "./ui/Box";
+import {
+  staggerContainer,
+  staggerChild,
+  viewportOnce,
+} from "./animations";
 
 export const BlogList: React.FC = () => {
   const [posts, setPosts] = useState<MDXPost[]>([]);
@@ -47,35 +52,60 @@ export const BlogList: React.FC = () => {
             transition={{ duration: 0.3 }}
             className="font-mono text-tui-muted"
           >
-            Loading blog posts...
+            <span className="cursor-block"></span> Loading blog posts...
           </motion.div>
         ) : (
           <Box title="find ./blog -type f">
             {posts.length > 0 ? (
-              <div className="space-y-6 font-mono">
-                {posts.map((post) => (
-                  <Link
-                    key={post.slug}
-                    to={`/blog/${post.slug}`}
-                    className="block group"
-                  >
-                    <div className="space-y-1">
-                      {/* Date and filename */}
-                      <div className="flex flex-col md:flex-row md:gap-4 text-sm">
-                        <span className="text-tui-yellow">{post.publishedAt}</span>
-                        <span className="text-tui-green group-hover:text-tui-cyan transition-colors">
-                          {post.slug}.md
-                        </span>
-                      </div>
-                      
-                      {/* Summary as quoted string */}
-                      <div className="text-tui-muted text-sm pl-0 md:pl-28">
-                        "{post.summary}"
-                      </div>
-                    </div>
-                  </Link>
+              <motion.div
+                className="space-y-6 font-mono"
+                variants={staggerContainer}
+                initial="hidden"
+                animate="visible"
+              >
+                {posts.map((post, index) => (
+                  <motion.div key={post.slug} variants={staggerChild}>
+                    <Link to={`/blog/${post.slug}`} className="block group">
+                      <motion.div
+                        className="space-y-1"
+                        whileHover={{ x: 4 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        {/* Date and filename */}
+                        <div className="flex flex-col md:flex-row md:gap-4 text-sm">
+                          <motion.span
+                            className="text-tui-yellow"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: index * 0.1 }}
+                          >
+                            {post.publishedAt}
+                          </motion.span>
+                          <motion.span
+                            className="text-tui-green group-hover:text-tui-cyan transition-colors"
+                            whileHover={{
+                              textShadow:
+                                "0 0 8px rgba(126, 231, 135, 0.5)",
+                            }}
+                          >
+                            {post.slug}.md
+                          </motion.span>
+                        </div>
+
+                        {/* Summary as quoted string */}
+                        <motion.div
+                          className="text-tui-muted text-sm pl-0 md:pl-28"
+                          initial={{ opacity: 0, x: -5 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.1 + 0.1 }}
+                        >
+                          "{post.summary}"
+                        </motion.div>
+                      </motion.div>
+                    </Link>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             ) : (
               <p className="text-tui-muted font-mono text-sm">
                 No posts found. Check back soon!
