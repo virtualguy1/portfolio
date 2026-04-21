@@ -4,11 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MDXPost } from "../types";
 import { AnimatedPage } from "./AnimatedPage";
 import { Box } from "./ui/Box";
-import {
-  staggerContainer,
-  staggerChild,
-  viewportOnce,
-} from "./animations";
+import { staggerContainer, staggerChild } from "./animations";
 
 export const BlogList: React.FC = () => {
   const [posts, setPosts] = useState<MDXPost[]>([]);
