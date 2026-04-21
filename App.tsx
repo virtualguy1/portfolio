@@ -13,6 +13,7 @@ import { Home } from "./components/Home";
 import { Projects } from "./components/Projects";
 import { BlogList } from "./components/BlogList";
 import { BlogPost } from "./components/BlogPost";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 const AnimatedRoutes: React.FC = () => {
   const location = useLocation();
@@ -34,28 +35,34 @@ const AnimatedRoutes: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-3 focus:py-2 focus:bg-tui-bg focus:text-tui-cyan focus:border focus:border-tui-cyan focus:font-mono focus:text-sm"
-      >
-        Skip to main content
-      </a>
-      <div className="min-h-screen bg-tui-bg text-tui-fg selection:bg-tui-cyan selection:text-tui-bg font-mono px-4 md:px-8 lg:px-0">
-        <div className="max-w-[800px] mx-auto">
-          <Header links={PORTFOLIO_DATA.navLinks} />
+    <ErrorBoundary>
+      <Router>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-3 focus:py-2 focus:bg-tui-bg focus:text-tui-cyan focus:border focus:border-tui-cyan focus:font-mono focus:text-sm"
+        >
+          Skip to main content
+        </a>
+        <div className="min-h-screen bg-tui-bg text-tui-fg selection:bg-tui-cyan selection:text-tui-bg font-mono px-4 md:px-8 lg:px-0">
+          <div className="max-w-[800px] mx-auto">
+            <Header links={PORTFOLIO_DATA.navLinks} />
 
-          <main id="main-content" tabIndex={-1}>
-            <AnimatedRoutes />
-          </main>
+            <main id="main-content" tabIndex={-1}>
+              {/* Scope a second boundary around the routed views so a
+                  render error in one page doesn't blow away the chrome. */}
+              <ErrorBoundary>
+                <AnimatedRoutes />
+              </ErrorBoundary>
+            </main>
 
-          <Footer
-            links={PORTFOLIO_DATA.socials}
-            copyrightName={PORTFOLIO_DATA.name}
-          />
+            <Footer
+              links={PORTFOLIO_DATA.socials}
+              copyrightName={PORTFOLIO_DATA.name}
+            />
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </ErrorBoundary>
   );
 };
 
