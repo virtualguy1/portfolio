@@ -22,7 +22,9 @@ const AnimatedNavLink: React.FC<{
       whileHover={{ x: 2 }}
       transition={{ type: "spring", stiffness: 400, damping: 20 }}
     >
-      [{label}]
+      <span aria-hidden="true">[</span>
+      {label}
+      <span aria-hidden="true">]</span>
     </motion.span>
   );
 
@@ -30,6 +32,7 @@ const AnimatedNavLink: React.FC<{
     return (
       <motion.a
         href={href}
+        aria-label={`${label} (opens in new tab)`}
         className="text-tui-muted hover:text-tui-cyan transition-colors"
         target="_blank"
         rel="noopener noreferrer"
@@ -57,6 +60,7 @@ const AnimatedNavLink: React.FC<{
       {({ isActive }) => (
         <motion.span
           className={`inline-block ${isActive ? "glow-pulse" : ""}`}
+          aria-current={isActive ? "page" : undefined}
           initial={{ opacity: 0, y: -5 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: index * 0.05 }}
@@ -65,7 +69,9 @@ const AnimatedNavLink: React.FC<{
             textShadow: "0 0 8px rgba(121, 192, 255, 0.4)",
           }}
         >
-          [{label}]
+          <span aria-hidden="true">[</span>
+          {label}
+          <span aria-hidden="true">]</span>
         </motion.span>
       )}
     </RouterNavLink>
@@ -82,6 +88,7 @@ export const Header: React.FC<HeaderProps> = ({ links }) => {
     >
       {/* Desktop Box */}
       <motion.nav
+        aria-label="Primary"
         className="hidden md:block font-mono text-sm border border-tui-border"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -93,7 +100,7 @@ export const Header: React.FC<HeaderProps> = ({ links }) => {
           initial="hidden"
           animate="visible"
         >
-          <motion.div variants={staggerChild}>
+          <motion.div variants={staggerChild} aria-hidden="true">
             <Prompt path="~/abhinav" />
           </motion.div>
           {links.map((link, index) => {
@@ -102,7 +109,7 @@ export const Header: React.FC<HeaderProps> = ({ links }) => {
 
             return (
               <AnimatedNavLink
-                key={index}
+                key={link.url}
                 href={link.url}
                 label={link.label}
                 isExternal={isExternal}
@@ -115,6 +122,7 @@ export const Header: React.FC<HeaderProps> = ({ links }) => {
 
       {/* Mobile Simple */}
       <motion.nav
+        aria-label="Primary"
         className="block md:hidden font-mono text-sm border border-tui-border px-3 py-3"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -125,6 +133,7 @@ export const Header: React.FC<HeaderProps> = ({ links }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1 }}
+          aria-hidden="true"
         >
           <Prompt path="~" />
         </motion.div>
@@ -140,7 +149,7 @@ export const Header: React.FC<HeaderProps> = ({ links }) => {
 
             return (
               <AnimatedNavLink
-                key={index}
+                key={link.url}
                 href={link.url}
                 label={link.label}
                 isExternal={isExternal}

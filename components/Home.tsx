@@ -12,11 +12,9 @@ interface HomeProps {
 export const Home: React.FC<HomeProps> = ({ data }) => {
   return (
     <AnimatedPage>
-      <main>
-        <Hero name={data.name} title={data.title} summary={data.summary} />
-        <ExperienceSection experiences={data.experience} />
-        <SkillsSection skills={data.skills} />
-      </main>
+      <Hero name={data.name} title={data.title} summary={data.summary} />
+      <ExperienceSection experiences={data.experience} />
+      <SkillsSection skills={data.skills} />
     </AnimatedPage>
   );
 };

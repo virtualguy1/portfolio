@@ -8,9 +8,11 @@ interface ExperienceSectionProps {
   experiences: ExperienceItem[];
 }
 
-// Animated separator line
+// Animated separator line (purely decorative ASCII)
 const AnimatedSeparator: React.FC = () => (
   <motion.div
+    aria-hidden="true"
+    role="separator"
     className="text-tui-border pt-4 overflow-hidden whitespace-nowrap"
     initial={{ width: 0, opacity: 0 }}
     whileInView={{ width: "100%", opacity: 1 }}
@@ -90,6 +92,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
                     variants={staggerChild}
                   >
                     <motion.span
+                      aria-hidden="true"
                       className="flex-shrink-0 text-tui-green"
                       initial={{ scale: 0 }}
                       whileInView={{ scale: 1 }}

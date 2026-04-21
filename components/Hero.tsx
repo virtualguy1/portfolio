@@ -10,10 +10,11 @@ interface HeroProps {
   summary: string;
 }
 
-// Animated ASCII underline component
+// Animated ASCII underline component (purely decorative)
 const AnimatedUnderline: React.FC<{ length: number }> = ({ length }) => {
   return (
     <motion.div
+      aria-hidden="true"
       className="text-tui-border overflow-hidden"
       initial={{ width: 0 }}
       animate={{ width: "auto" }}
@@ -45,10 +46,17 @@ export const Hero: React.FC<HeroProps> = ({ name, title, summary }) => {
     <section className="mb-8">
       <Box title="whoami">
         <div className="space-y-4">
-          {/* Name with glitch effect */}
-          <h1 className="text-2xl md:text-3xl font-bold text-tui-fg">
-            {displayName}
-            {!isComplete && <span className="cursor-block"></span>}
+          {/* Name with glitch effect. Use `aria-label` on the header so
+              assistive tech reads the final name instead of the
+              mid-animation glitch characters. */}
+          <h1
+            aria-label={name}
+            className="text-2xl md:text-3xl font-bold text-tui-fg"
+          >
+            <span aria-hidden="true">{displayName}</span>
+            {!isComplete && (
+              <span aria-hidden="true" className="cursor-block"></span>
+            )}
           </h1>
 
           {/* ASCII underline - animated draw when typing is complete */}
@@ -85,6 +93,7 @@ export const Hero: React.FC<HeroProps> = ({ name, title, summary }) => {
                       variants={staggerChild}
                     >
                       <motion.span
+                        aria-hidden="true"
                         className="text-tui-green flex-shrink-0"
                         initial={{ opacity: 0, x: -5 }}
                         animate={{ opacity: 1, x: 0 }}

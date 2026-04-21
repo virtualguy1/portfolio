@@ -14,12 +14,13 @@ interface ProjectsProps {
   projects: ProjectItem[];
 }
 
-// Animated tree character component
+// Animated tree character component (purely decorative ASCII).
 const TreeChar: React.FC<{
   char: string;
   delay?: number;
 }> = ({ char, delay = 0 }) => (
   <motion.span
+    aria-hidden="true"
     className="text-tui-border"
     initial={{ opacity: 0 }}
     whileInView={{ opacity: 1 }}
@@ -55,8 +56,9 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
               >
                 {/* Directory listing style */}
                 <div className="flex flex-col md:flex-row md:items-start gap-2">
-                  {/* Permissions - fade in */}
+                  {/* Permissions — decorative "ls -la"-style flavour */}
                   <motion.span
+                    aria-hidden="true"
                     className="text-tui-muted text-xs"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -136,11 +138,13 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`${project.title} (opens in new tab)`}
                         className="text-tui-cyan hover:text-tui-green transition-colors link-underline"
                         whileHover={{ x: 3 }}
                         transition={{ duration: 0.2 }}
                       >
                         <motion.span
+                          aria-hidden="true"
                           className="inline-block"
                           whileHover={{ x: 2 }}
                           transition={{
