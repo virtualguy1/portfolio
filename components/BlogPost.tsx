@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, type ComponentType } from "react";
 import { useParams, Link } from "react-router";
 import { MDXProvider } from "@mdx-js/react";
+import type { MDXComponents } from "mdx/types";
 import { motion } from "framer-motion";
+import type { MDXFrontmatter } from "../types";
 import { staggerContainer, staggerChild, viewportOnce } from "./animations";
 
-const components = {
-  h1: (props: any) => (
+// MDX elements get a lot of props from remark/rehype – typing them with the
+// canonical `MDXComponents` map keeps us honest without widening to `any`.
+const components: MDXComponents = {
+  h1: (props) => (
     <motion.h1
       className="text-2xl md:text-3xl font-bold mt-8 mb-4 text-tui-cyan border-b border-tui-border pb-2"
       initial={{ opacity: 0, x: -10 }}
@@ -15,7 +19,7 @@ const components = {
       {...props}
     />
   ),
-  h2: (props: any) => (
+  h2: (props) => (
     <motion.h2
       className="text-xl md:text-2xl font-bold mt-8 mb-4 text-tui-magenta"
       initial={{ opacity: 0, x: -10 }}
@@ -25,7 +29,7 @@ const components = {
       {...props}
     />
   ),
-  h3: (props: any) => (
+  h3: (props) => (
     <motion.h3
       className="text-lg md:text-xl font-bold mt-6 mb-3 text-tui-green"
       initial={{ opacity: 0, x: -10 }}
@@ -35,7 +39,7 @@ const components = {
       {...props}
     />
   ),
-  p: (props: any) => (
+  p: (props) => (
     <motion.p
       className="mb-4 leading-relaxed text-tui-fg"
       initial={{ opacity: 0 }}
@@ -45,7 +49,7 @@ const components = {
       {...props}
     />
   ),
-  ul: (props: any) => (
+  ul: (props) => (
     <motion.ul
       className="list-disc list-inside mb-4 space-y-2 text-tui-fg"
       initial={{ opacity: 0 }}
@@ -55,7 +59,7 @@ const components = {
       {...props}
     />
   ),
-  ol: (props: any) => (
+  ol: (props) => (
     <motion.ol
       className="list-decimal list-inside mb-4 space-y-2 text-tui-fg"
       initial={{ opacity: 0 }}
@@ -65,15 +69,15 @@ const components = {
       {...props}
     />
   ),
-  li: (props: any) => <li className="ml-4" {...props} />,
-  a: (props: any) => (
+  li: (props) => <li className="ml-4" {...props} />,
+  a: (props) => (
     <motion.a
       className="text-tui-cyan hover:text-tui-green transition-colors link-underline"
       whileHover={{ x: 1 }}
       {...props}
     />
   ),
-  blockquote: (props: any) => (
+  blockquote: (props) => (
     <motion.blockquote
       className="border-l-2 border-tui-muted pl-4 italic my-4 text-tui-muted font-mono"
       initial={{ opacity: 0, x: -10 }}
@@ -83,13 +87,13 @@ const components = {
       {...props}
     />
   ),
-  code: (props: any) => (
+  code: (props) => (
     <code
       className="bg-tui-border px-1 py-0.5 text-sm font-mono text-tui-orange"
       {...props}
     />
   ),
-  pre: (props: any) => (
+  pre: (props) => (
     <motion.pre
       className="bg-tui-border p-4 overflow-x-auto mb-4 border border-tui-border rounded"
       initial={{ opacity: 0 }}
@@ -99,7 +103,7 @@ const components = {
       {...props}
     />
   ),
-  img: (props: any) => (
+  img: (props) => (
     <motion.img
       className="my-6 max-w-full border border-tui-border"
       initial={{ opacity: 0, scale: 0.98 }}
@@ -109,7 +113,7 @@ const components = {
       {...props}
     />
   ),
-  hr: (props: any) => (
+  hr: (props) => (
     <motion.hr
       className="border-tui-border my-8"
       initial={{ width: 0 }}
@@ -119,7 +123,7 @@ const components = {
       {...props}
     />
   ),
-  table: (props: any) => (
+  table: (props) => (
     <motion.div
       className="overflow-x-auto my-6"
       initial={{ opacity: 0 }}
@@ -133,53 +137,105 @@ const components = {
       />
     </motion.div>
   ),
-  thead: (props: any) => <thead className="bg-tui-border" {...props} />,
-  tbody: (props: any) => <tbody {...props} />,
-  tr: (props: any) => (
+  thead: (props) => <thead className="bg-tui-border" {...props} />,
+  tbody: (props) => <tbody {...props} />,
+  tr: (props) => (
     <tr
       className="border-b border-tui-border hover:bg-tui-border/50 transition-colors"
       {...props}
     />
   ),
-  th: (props: any) => (
+  th: (props) => (
     <th
       className="border border-tui-border px-4 py-2 text-left font-bold text-tui-cyan"
       {...props}
     />
   ),
-  td: (props: any) => (
+  td: (props) => (
     <td className="border border-tui-border px-4 py-2 text-tui-fg" {...props} />
   ),
 };
 
+// The dynamic import returns the MDX component plus its frontmatter.
+type MDXModule = {
+  default: ComponentType;
+  frontmatter: MDXFrontmatter;
+};
+
+type LoadState =
+  | { status: "loading" }
+  | { status: "ready"; Content: ComponentType; meta: MDXFrontmatter }
+  | { status: "error"; error: unknown };
+
 export const BlogPost: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [Content, setContent] = useState<any>(null);
-  const [meta, setMeta] = useState<any>(null);
+  const [state, setState] = useState<LoadState>({ status: "loading" });
 
   useEffect(() => {
-    const loadPost = async () => {
-      try {
-        const module = await import(`../content/blog/${slug}.mdx`);
-        setContent(() => module.default);
-        setMeta(module.frontmatter);
-      } catch (error) {
-        console.error("Error loading post:", error);
-      }
-    };
-
-    if (slug) {
-      loadPost();
+    if (!slug) {
+      setState({ status: "error", error: new Error("Missing blog slug") });
+      return;
     }
+
+    let cancelled = false;
+    setState({ status: "loading" });
+
+    (async () => {
+      try {
+        const mod = (await import(
+          `../content/blog/${slug}.mdx`
+        )) as MDXModule;
+        if (cancelled) return;
+        setState({
+          status: "ready",
+          Content: mod.default,
+          meta: mod.frontmatter,
+        });
+      } catch (error) {
+        if (cancelled) return;
+        console.error("Error loading post:", error);
+        setState({ status: "error", error });
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
   }, [slug]);
 
-  if (!Content) {
+  if (state.status === "loading") {
     return (
-      <div className="font-mono text-tui-muted text-sm">
-        <span className="cursor-block"></span> Loading post...
+      <div
+        className="font-mono text-tui-muted text-sm"
+        role="status"
+        aria-live="polite"
+      >
+        <span className="cursor-block" aria-hidden="true"></span> Loading
+        post...
       </div>
     );
   }
+
+  if (state.status === "error") {
+    return (
+      <div
+        className="font-mono text-tui-muted text-sm space-y-3"
+        role="alert"
+      >
+        <p className="text-tui-red">
+          Could not load post <code>{slug}</code>.
+        </p>
+        <Link
+          to="/blog"
+          className="inline-flex items-center text-tui-cyan hover:text-tui-green link-underline"
+        >
+          ← cd ../blog
+        </Link>
+      </div>
+    );
+  }
+
+  const { Content, meta } = state;
 
   return (
     <motion.div
@@ -202,6 +258,7 @@ export const BlogPost: React.FC = () => {
             className="mr-2"
             whileHover={{ x: -3 }}
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
+            aria-hidden="true"
           >
             ←
           </motion.span>
@@ -220,13 +277,13 @@ export const BlogPost: React.FC = () => {
           className="text-2xl md:text-3xl font-bold mb-2 text-tui-cyan font-mono"
           variants={staggerChild}
         >
-          {meta?.title}
+          {meta.title}
         </motion.h1>
         <motion.div
           className="flex items-center text-sm text-tui-yellow font-mono"
           variants={staggerChild}
         >
-          <time dateTime={meta?.publishedAt}>{meta?.publishedAt}</time>
+          <time dateTime={meta.publishedAt}>{meta.publishedAt}</time>
         </motion.div>
       </motion.header>
 
@@ -258,6 +315,7 @@ export const BlogPost: React.FC = () => {
             className="mr-2"
             whileHover={{ x: -3 }}
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
+            aria-hidden="true"
           >
             ←
           </motion.span>
