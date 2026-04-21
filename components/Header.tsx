@@ -3,7 +3,7 @@ import { NavLink as RouterNavLink } from "react-router";
 import { motion } from "framer-motion";
 import { NavLink } from "../types";
 import { Prompt } from "./ui/Prompt";
-import { staggerContainer, staggerChild, viewportOnce } from "./animations";
+import { staggerContainer, staggerChild } from "./animations";
 
 interface HeaderProps {
   links: NavLink[];

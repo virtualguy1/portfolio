@@ -31,20 +31,9 @@ export const PORTFOLIO_DATA: ProfileData = {
       skills: "Skills: Spring Boot, Microservices, IBM MQ, IBM ODM, JPA, PostgreSQL, MS SQL Server, PCF, Dynatrace, JUnit, Spring Batch"
     }
   ],
-  projects: [
-    {
-      title: "Project 1",
-      description: "Details.",
-      techStack: ["Java 25", "Spring 7", "Spring Boot 4", "Docker", "Postgres"],
-      link: "#"
-    },
-    {
-      title: "Project 2",
-      description: "Details.",
-      techStack: ["Java 17", "Spring Boot 3", "MySQL", "Docker"],
-      link: "#"
-    }
-  ],
+  // TODO: Populate with real projects. Each entry needs a title, short
+  // description, real tech stack, and a working link (GitHub, demo, etc.).
+  projects: [],
   skills: [
     {
       category: "Programming Languages",
