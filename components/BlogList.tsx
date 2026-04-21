@@ -4,12 +4,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MDXFrontmatter, MDXPost } from "../types";
 import { AnimatedPage } from "./AnimatedPage";
 import { Box } from "./ui/Box";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import { staggerContainer, staggerChild } from "./animations";
 
 // Shape that Vite's `import.meta.glob()` loader resolves to for an MDX file.
 type BlogModule = { frontmatter: MDXFrontmatter };
 
 export const BlogList: React.FC = () => {
+  useDocumentTitle("Blog");
   const [posts, setPosts] = useState<MDXPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 

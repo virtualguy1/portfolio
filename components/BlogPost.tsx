@@ -4,6 +4,7 @@ import { MDXProvider } from "@mdx-js/react";
 import type { MDXComponents } from "mdx/types";
 import { motion } from "framer-motion";
 import type { MDXFrontmatter } from "../types";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import { staggerContainer, staggerChild, viewportOnce } from "./animations";
 
 // MDX elements get a lot of props from remark/rehype – typing them with the
@@ -170,6 +171,12 @@ type LoadState =
 export const BlogPost: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const [state, setState] = useState<LoadState>({ status: "loading" });
+
+  // Reflect the post title (or a sensible fallback) in the browser
+  // tab as soon as we have it.
+  const documentTitle =
+    state.status === "ready" ? state.meta.title : (slug ?? "Blog");
+  useDocumentTitle(documentTitle);
 
   useEffect(() => {
     if (!slug) return;

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ProjectItem } from "../types";
 import { Box } from "./ui/Box";
 import { Tag } from "./ui/Tag";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import {
   staggerContainer,
   staggerChild,
@@ -32,6 +33,7 @@ const TreeChar: React.FC<{
 );
 
 export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
+  useDocumentTitle("Projects");
   return (
     <section className="mb-12">
       <Box title="ls -la ./projects">
