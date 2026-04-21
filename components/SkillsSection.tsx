@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { motion } from "framer-motion";
 import { SkillCategory } from "../types";
 import { Box } from "./ui/Box";
@@ -13,32 +13,39 @@ interface SkillsSectionProps {
   skills: SkillCategory[];
 }
 
-// Animated skill tag with hover effects
-const SkillTag: React.FC<{ skill: string; index: number }> = ({
+// Animated skill tag with hover effects. `memo`'d because it renders
+// once per comma-separated skill and the props are primitives that
+// never change after mount.
+const SkillTag = memo(function SkillTag({
   skill,
   index,
-}) => (
-  <motion.span
-    className="px-2 py-1 bg-tui-border/20 text-tui-orange rounded text-xs border border-tui-border hover:border-tui-cyan hover:text-tui-cyan tag-enhanced"
-    initial={{ opacity: 0, scale: 0.8 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={viewportOnce}
-    transition={{
-      duration: 0.2,
-      delay: index * 0.03,
-      type: "spring",
-      stiffness: 400,
-      damping: 20,
-    }}
-    whileHover={{
-      scale: 1.05,
-      y: -2,
-      boxShadow: "0 0 10px rgba(255, 166, 87, 0.3)",
-    }}
-  >
-    {skill.trim()}
-  </motion.span>
-);
+}: {
+  skill: string;
+  index: number;
+}) {
+  return (
+    <motion.span
+      className="px-2 py-1 bg-tui-border/20 text-tui-orange rounded text-xs border border-tui-border hover:border-tui-cyan hover:text-tui-cyan tag-enhanced"
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={viewportOnce}
+      transition={{
+        duration: 0.2,
+        delay: index * 0.03,
+        type: "spring",
+        stiffness: 400,
+        damping: 20,
+      }}
+      whileHover={{
+        scale: 1.05,
+        y: -2,
+        boxShadow: "0 0 10px rgba(255, 166, 87, 0.3)",
+      }}
+    >
+      {skill.trim()}
+    </motion.span>
+  );
+});
 
 export const SkillsSection: React.FC<SkillsSectionProps> = ({ skills }) => {
   return (

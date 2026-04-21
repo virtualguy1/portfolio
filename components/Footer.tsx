@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { motion } from "framer-motion";
 import { NavLink } from "../types";
 import { staggerContainer, viewportOnce } from "./animations";
@@ -8,7 +8,7 @@ interface FooterProps {
   copyrightName: string;
 }
 
-export const Footer: React.FC<FooterProps> = ({ links, copyrightName }) => {
+const FooterComponent: React.FC<FooterProps> = ({ links, copyrightName }) => {
   return (
     <motion.footer
       aria-label="Site footer"
@@ -76,11 +76,14 @@ export const Footer: React.FC<FooterProps> = ({ links, copyrightName }) => {
           transition={{ duration: 0.3, delay: 0.2 }}
         >
           <span aria-hidden="true">©</span>
-          <span className="sr-only">
-            Copyright{" "}
-          </span> {new Date().getFullYear()} {copyrightName}
+          <span className="sr-only">Copyright </span>{" "}
+          {new Date().getFullYear()} {copyrightName}
         </motion.div>
       </motion.div>
     </motion.footer>
   );
 };
+
+// Socials + copyright name are static props, so memoising prevents
+// unnecessary work when the parent re-renders due to routing.
+export const Footer = memo(FooterComponent);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { NavLink as RouterNavLink } from "react-router";
 import { motion } from "framer-motion";
 import { NavLink } from "../types";
@@ -78,7 +78,7 @@ const AnimatedNavLink: React.FC<{
   );
 };
 
-export const Header: React.FC<HeaderProps> = ({ links }) => {
+const HeaderComponent: React.FC<HeaderProps> = ({ links }) => {
   return (
     <motion.div
       className="py-6"
@@ -162,3 +162,8 @@ export const Header: React.FC<HeaderProps> = ({ links }) => {
     </motion.div>
   );
 };
+
+// The nav links only change if the PORTFOLIO_DATA constant changes,
+// which it doesn't at runtime. Memoising avoids replaying the whole
+// stagger animation on every re-render of <App>.
+export const Header = memo(HeaderComponent);

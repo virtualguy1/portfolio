@@ -1,13 +1,16 @@
-import React from "react";
+import React, { memo } from "react";
 import { motion } from "framer-motion";
+
+type TagColor = "orange" | "green" | "cyan" | "yellow" | "magenta";
 
 interface TagProps {
   children: React.ReactNode;
-  color?: "orange" | "green" | "cyan" | "yellow" | "magenta";
+  color?: TagColor;
 }
 
-// Color configurations with glow shadows
-const colorConfig = {
+// Color configurations with glow shadows. Hoisted to module scope so
+// the object isn't re-created on every render.
+const COLOR_CONFIG: Record<TagColor, { text: string; glow: string }> = {
   orange: {
     text: "text-tui-orange",
     glow: "0 0 10px rgba(255, 166, 87, 0.4), 0 0 20px rgba(255, 166, 87, 0.2)",
@@ -30,8 +33,8 @@ const colorConfig = {
   },
 };
 
-export const Tag: React.FC<TagProps> = ({ children, color = "orange" }) => {
-  const config = colorConfig[color];
+const TagComponent: React.FC<TagProps> = ({ children, color = "orange" }) => {
+  const config = COLOR_CONFIG[color];
 
   return (
     <motion.span
@@ -50,7 +53,11 @@ export const Tag: React.FC<TagProps> = ({ children, color = "orange" }) => {
         damping: 15,
       }}
     >
-      [{children}]
+      <span aria-hidden="true">[</span>
+      {children}
+      <span aria-hidden="true">]</span>
     </motion.span>
   );
 };
+
+export const Tag = memo(TagComponent);
