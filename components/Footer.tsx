@@ -76,8 +76,9 @@ const FooterComponent: React.FC<FooterProps> = ({ links, copyrightName }) => {
           transition={{ duration: 0.3, delay: 0.2 }}
         >
           <span aria-hidden="true">©</span>
-          <span className="sr-only">Copyright </span>{" "}
-          {new Date().getFullYear()} {copyrightName}
+          <span className="sr-only">
+            Copyright{" "}
+          </span> {new Date().getFullYear()} {copyrightName}
         </motion.div>
       </motion.div>
     </motion.footer>

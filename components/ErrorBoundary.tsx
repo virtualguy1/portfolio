@@ -53,8 +53,8 @@ export class ErrorBoundary extends Component<
         <div className="max-w-md border border-tui-red p-6 space-y-4">
           <p className="text-tui-red text-lg">$ ./portfolio --crashed</p>
           <p className="text-sm text-tui-muted">
-            Something went wrong rendering this page. The error was logged
-            to the console.
+            Something went wrong rendering this page. The error was logged to
+            the console.
           </p>
           <pre className="text-xs text-tui-muted whitespace-pre-wrap break-words">
             {error.message}
