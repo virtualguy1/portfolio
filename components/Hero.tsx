@@ -48,9 +48,7 @@ export const Hero: React.FC<HeroProps> = ({ name, title, summary }) => {
           {/* Name with glitch effect */}
           <h1 className="text-2xl md:text-3xl font-bold text-tui-fg">
             {displayName}
-            {!isComplete && (
-              <span className="cursor-block"></span>
-            )}
+            {!isComplete && <span className="cursor-block"></span>}
           </h1>
 
           {/* ASCII underline - animated draw when typing is complete */}

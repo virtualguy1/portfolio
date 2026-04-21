@@ -1,4 +1,4 @@
-import { Variants, Transition } from 'framer-motion';
+import { Variants, Transition } from "framer-motion";
 
 // ============================================
 // BASE TRANSITIONS
@@ -7,12 +7,12 @@ import { Variants, Transition } from 'framer-motion';
 // Minimal transition - subtle and fast
 export const smoothTransition: Transition = {
   duration: 0.3,
-  ease: 'easeOut',
+  ease: "easeOut",
 };
 
 // Smooth spring for bouncy effects
 export const springTransition: Transition = {
-  type: 'spring',
+  type: "spring",
   stiffness: 300,
   damping: 20,
 };
@@ -74,7 +74,7 @@ export const scaleFade: Variants = {
     scale: 1,
     transition: {
       duration: 0.3,
-      ease: 'easeOut',
+      ease: "easeOut",
     },
   },
 };
@@ -88,7 +88,7 @@ export const pageVariants: Variants = {
   initial: { opacity: 0 },
   animate: {
     opacity: 1,
-    transition: { duration: 0.3, ease: 'easeOut' },
+    transition: { duration: 0.3, ease: "easeOut" },
   },
   exit: {
     opacity: 0,
@@ -138,8 +138,8 @@ export const staggerContainerSlow: Variants = {
 
 // Child item for stagger (fade up)
 export const staggerChild: Variants = {
-  hidden: { 
-    opacity: 0, 
+  hidden: {
+    opacity: 0,
     y: 20,
   },
   visible: {
@@ -159,15 +159,15 @@ export const staggerChildFade: Variants = {
     opacity: 1,
     transition: {
       duration: 0.4,
-      ease: 'easeOut',
+      ease: "easeOut",
     },
   },
 };
 
 // Child item (slide from left)
 export const staggerChildLeft: Variants = {
-  hidden: { 
-    opacity: 0, 
+  hidden: {
+    opacity: 0,
     x: -15,
   },
   visible: {
@@ -196,7 +196,7 @@ export const borderTrace: Variants = {
     transition: {
       pathLength: {
         duration: 0.8,
-        ease: 'easeInOut',
+        ease: "easeInOut",
       },
       opacity: {
         duration: 0.2,
@@ -207,7 +207,7 @@ export const borderTrace: Variants = {
 
 // Box content fade (appears after border traces)
 export const boxContent: Variants = {
-  hidden: { 
+  hidden: {
     opacity: 0,
   },
   visible: {
@@ -215,14 +215,14 @@ export const boxContent: Variants = {
     transition: {
       duration: 0.3,
       delay: 0.4, // Wait for border to trace
-      ease: 'easeOut',
+      ease: "easeOut",
     },
   },
 };
 
 // Box title bar animation
 export const boxTitleBar: Variants = {
-  hidden: { 
+  hidden: {
     opacity: 0,
     x: -10,
   },
@@ -232,7 +232,7 @@ export const boxTitleBar: Variants = {
     transition: {
       duration: 0.3,
       delay: 0.2,
-      ease: 'easeOut',
+      ease: "easeOut",
     },
   },
 };
@@ -243,31 +243,31 @@ export const boxTitleBar: Variants = {
 
 // Link hover animation
 export const linkHover = {
-  rest: { 
+  rest: {
     x: 0,
-    color: '#8b949e', // tui-muted
+    color: "#8b949e", // tui-muted
   },
-  hover: { 
+  hover: {
     x: 2,
-    color: '#79c0ff', // tui-cyan
+    color: "#79c0ff", // tui-cyan
     transition: {
       duration: 0.2,
-      ease: 'easeOut',
+      ease: "easeOut",
     },
   },
 };
 
 // Tag hover with bounce
 export const tagHover = {
-  rest: { 
+  rest: {
     scale: 1,
     y: 0,
   },
-  hover: { 
+  hover: {
     scale: 1.02,
     y: -2,
     transition: {
-      type: 'spring',
+      type: "spring",
       stiffness: 400,
       damping: 15,
     },
@@ -283,16 +283,16 @@ export const tagHover = {
 
 // ASCII underline draw animation
 export const underlineDraw: Variants = {
-  hidden: { 
+  hidden: {
     width: 0,
     opacity: 0,
   },
   visible: {
-    width: '100%',
+    width: "100%",
     opacity: 1,
     transition: {
       duration: 0.5,
-      ease: 'easeOut',
+      ease: "easeOut",
     },
   },
 };
@@ -304,7 +304,7 @@ export const cursorBlink: Variants = {
     transition: {
       duration: 1,
       repeat: Infinity,
-      ease: 'linear',
+      ease: "linear",
       times: [0, 0.5, 0.5, 1], // Step-like timing
     },
   },
@@ -314,14 +314,14 @@ export const cursorBlink: Variants = {
 export const glowPulse: Variants = {
   pulse: {
     boxShadow: [
-      '0 0 5px rgba(121, 192, 255, 0.2)',
-      '0 0 15px rgba(121, 192, 255, 0.4)',
-      '0 0 5px rgba(121, 192, 255, 0.2)',
+      "0 0 5px rgba(121, 192, 255, 0.2)",
+      "0 0 15px rgba(121, 192, 255, 0.4)",
+      "0 0 5px rgba(121, 192, 255, 0.2)",
     ],
     transition: {
       duration: 2,
       repeat: Infinity,
-      ease: 'easeInOut',
+      ease: "easeInOut",
     },
   },
 };
@@ -333,19 +333,19 @@ export const glowPulse: Variants = {
 // Viewport settings for scroll animations
 export const viewportOnce = {
   once: true,
-  margin: '-50px',
+  margin: "-50px",
 };
 
 // Viewport for earlier trigger
 export const viewportEarly = {
   once: true,
-  margin: '-100px',
+  margin: "-100px",
 };
 
 // Viewport for later trigger (element more in view)
 export const viewportLate = {
   once: true,
-  margin: '0px',
+  margin: "0px",
 };
 
 // ============================================
@@ -360,7 +360,7 @@ export const getStaggerDelay = (index: number, baseDelay = 0.1): number => {
 // Create custom stagger container with configurable timing
 export const createStaggerContainer = (
   staggerDelay = 0.1,
-  initialDelay = 0.1
+  initialDelay = 0.1,
 ): Variants => ({
   hidden: { opacity: 0 },
   visible: {

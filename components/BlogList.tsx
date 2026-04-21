@@ -29,8 +29,7 @@ export const BlogList: React.FC = () => {
       const loadedPosts = await Promise.all(postPromises);
       loadedPosts.sort(
         (a, b) =>
-          new Date(b.publishedAt).getTime() -
-          new Date(a.publishedAt).getTime(),
+          new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
       );
       if (cancelled) return;
       setPosts(loadedPosts);
@@ -90,8 +89,7 @@ export const BlogList: React.FC = () => {
                           <motion.span
                             className="text-tui-green group-hover:text-tui-cyan transition-colors"
                             whileHover={{
-                              textShadow:
-                                "0 0 8px rgba(126, 231, 135, 0.5)",
+                              textShadow: "0 0 8px rgba(126, 231, 135, 0.5)",
                             }}
                           >
                             {post.slug}.md
@@ -105,7 +103,7 @@ export const BlogList: React.FC = () => {
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: index * 0.1 + 0.1 }}
                         >
-                          "{post.summary}"
+                          &ldquo;{post.summary}&rdquo;
                         </motion.div>
                       </motion.div>
                     </Link>

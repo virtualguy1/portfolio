@@ -44,7 +44,11 @@ const AnimatedBorder: React.FC<{ width: number; height: number }> = ({
   );
 };
 
-export const Box: React.FC<BoxProps> = ({ title, children, className = "" }) => {
+export const Box: React.FC<BoxProps> = ({
+  title,
+  children,
+  className = "",
+}) => {
   const [dimensions, setDimensions] = React.useState({ width: 0, height: 0 });
   const boxRef = React.useRef<HTMLDivElement>(null);
 
@@ -77,10 +81,7 @@ export const Box: React.FC<BoxProps> = ({ title, children, className = "" }) => 
       viewport={viewportOnce}
     >
       {/* Desktop: Box with animated borders */}
-      <div
-        ref={boxRef}
-        className="hidden md:block font-mono text-sm relative"
-      >
+      <div ref={boxRef} className="hidden md:block font-mono text-sm relative">
         {/* Animated SVG Border */}
         {dimensions.width > 0 && (
           <AnimatedBorder width={dimensions.width} height={dimensions.height} />

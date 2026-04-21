@@ -1,15 +1,15 @@
-import { ProfileData } from './types';
+import { ProfileData } from "./types";
 
 export const PORTFOLIO_DATA: ProfileData = {
   name: "Abhinav Srivastav",
   title: "Backend Engineer",
-  summary: "Backend Developer with 2+ years' of proven expertise in implementing enterprise-grade microservices architectures using Spring Boot, seeking to leverage development expertise and strong problem-solving abilities to drive digital transformation initiatives.",
+  summary:
+    "Backend Developer with 2+ years' of proven expertise in implementing enterprise-grade microservices architectures using Spring Boot, seeking to leverage development expertise and strong problem-solving abilities to drive digital transformation initiatives.",
   navLinks: [
     { label: "home", url: "/" },
     { label: "projects", url: "/projects" },
     { label: "blog", url: "/blog" },
     { label: "github", url: "https://github.com/virtualguy1" },
-
   ],
   experience: [
     {
@@ -26,10 +26,11 @@ export const PORTFOLIO_DATA: ProfileData = {
         "Elevated reliability by expanding unit/integration test coverage (JUnit, Mockito), strengthening CI gates, and reducing production defects.",
         "Built Spring Batch recovery job generating inventory for claims failing due to technical/business errors, enabling structured manual remediation.",
         "Delivered bulk data correction endpoint ingesting Excel to reconcile discrepancies across databases, slashing manual correction effort.",
-        "Partnered with product owners and actuarial teams to convert complex adjudication policies into executable rule artifacts aligned with business intent."
+        "Partnered with product owners and actuarial teams to convert complex adjudication policies into executable rule artifacts aligned with business intent.",
       ],
-      skills: "Skills: Spring Boot, Microservices, IBM MQ, IBM ODM, JPA, PostgreSQL, MS SQL Server, PCF, Dynatrace, JUnit, Spring Batch"
-    }
+      skills:
+        "Skills: Spring Boot, Microservices, IBM MQ, IBM ODM, JPA, PostgreSQL, MS SQL Server, PCF, Dynatrace, JUnit, Spring Batch",
+    },
   ],
   // TODO: Populate with real projects. Each entry needs a title, short
   // description, real tech stack, and a working link (GitHub, demo, etc.).
@@ -37,32 +38,34 @@ export const PORTFOLIO_DATA: ProfileData = {
   skills: [
     {
       category: "Programming Languages",
-      items: "Java, JavaScript, Bash, Python, ILOG JRules"
+      items: "Java, JavaScript, Bash, Python, ILOG JRules",
     },
     {
       category: "Frameworks/ libraries",
-      items: "React.js, Tailwind CSS, Node.js, Express.js, Spring, Spring Boot, Spring Batch"
+      items:
+        "React.js, Tailwind CSS, Node.js, Express.js, Spring, Spring Boot, Spring Batch",
     },
     {
       category: "Databases",
-      items: "MS SQL Server, MySQL, PostgreSQL"
+      items: "MS SQL Server, MySQL, PostgreSQL",
     },
     {
       category: "System & Infrastructure",
-      items: "Docker, Dynatrace, UrbanCode Deploy, Jenkins, Pivotal Cloud Foundry"
+      items:
+        "Docker, Dynatrace, UrbanCode Deploy, Jenkins, Pivotal Cloud Foundry",
     },
     {
       category: "Tools/Tech",
-      items: "Git, GitHub, Postman, IBM ODM"
+      items: "Git, GitHub, Postman, IBM ODM",
     },
     {
       category: "Project Management Tools",
-      items: "Confluence, Jira, SharePoint"
-    }
+      items: "Confluence, Jira, SharePoint",
+    },
   ],
   socials: [
     { label: "email", url: "mailto:abhinavrx97@gmail.com" },
     { label: "linkedin", url: "https://www.linkedin.com/in/abhinavrx/" },
     { label: "x", url: "https://x.com/ASrivastav97" },
-  ]
+  ],
 };

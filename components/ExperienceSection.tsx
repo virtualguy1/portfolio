@@ -2,11 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ExperienceItem } from "../types";
 import { Box } from "./ui/Box";
-import {
-  staggerContainer,
-  staggerChild,
-  viewportOnce,
-} from "./animations";
+import { staggerContainer, staggerChild, viewportOnce } from "./animations";
 
 interface ExperienceSectionProps {
   experiences: ExperienceItem[];

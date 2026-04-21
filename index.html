@@ -1,73 +1,72 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Abhinav Srivastav</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
-    rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['JetBrains Mono', 'monospace'],
-            mono: ['JetBrains Mono', 'monospace'],
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Abhinav Srivastav</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["JetBrains Mono", "monospace"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+            colors: {
+              tui: {
+                bg: "#0d1117",
+                fg: "#c9d1d9",
+                muted: "#8b949e",
+                border: "#30363d",
+                green: "#7ee787",
+                cyan: "#79c0ff",
+                yellow: "#e3b341",
+                magenta: "#d2a8ff",
+                red: "#ff7b72",
+                orange: "#ffa657",
+              },
+            },
+            animation: {
+              fadeIn: "fadeIn 0.5s ease-in forwards",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0", transform: "translateY(10px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+            },
           },
-          colors: {
-            tui: {
-              bg: '#0d1117',
-              fg: '#c9d1d9',
-              muted: '#8b949e',
-              border: '#30363d',
-              green: '#7ee787',
-              cyan: '#79c0ff',
-              yellow: '#e3b341',
-              magenta: '#d2a8ff',
-              red: '#ff7b72',
-              orange: '#ffa657',
-            }
-          },
-          animation: {
-            fadeIn: 'fadeIn 0.5s ease-in forwards',
-          },
-          keyframes: {
-            fadeIn: {
-              '0%': { opacity: '0', transform: 'translateY(10px)' },
-              '100%': { opacity: '1', transform: 'translateY(0)' },
-            }
-          }
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #0d1117;
+        color: #c9d1d9;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "react/": "https://aistudiocdn.com/react@^19.2.0/",
+          "react": "https://aistudiocdn.com/react@^19.2.0",
+          "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
         }
       }
-    }
-  </script>
-  <style>
-    body {
-      background-color: #0d1117;
-      color: #c9d1d9;
-    }
-  </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
-  }
-}
-</script>
-  <link rel="stylesheet" href="/index.css">
-</head>
+    </script>
+    <link rel="stylesheet" href="/index.css" />
+  </head>
 
-<body>
-  <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
-</body>
-
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
 </html>

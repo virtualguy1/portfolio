@@ -172,19 +172,16 @@ export const BlogPost: React.FC = () => {
   const [state, setState] = useState<LoadState>({ status: "loading" });
 
   useEffect(() => {
-    if (!slug) {
-      setState({ status: "error", error: new Error("Missing blog slug") });
-      return;
-    }
+    if (!slug) return;
 
+    // App.tsx keys `<Routes>` on `location.pathname`, so a new slug
+    // already unmounts/remounts this component and resets state to
+    // "loading" via `useState`'s initial value. No extra reset needed.
     let cancelled = false;
-    setState({ status: "loading" });
 
     (async () => {
       try {
-        const mod = (await import(
-          `../content/blog/${slug}.mdx`
-        )) as MDXModule;
+        const mod = (await import(`../content/blog/${slug}.mdx`)) as MDXModule;
         if (cancelled) return;
         setState({
           status: "ready",
@@ -203,6 +200,17 @@ export const BlogPost: React.FC = () => {
     };
   }, [slug]);
 
+  // The route pattern is `/blog/:slug`, so React Router guarantees a
+  // value here, but defending against the optional type keeps TS (and
+  // future refactors) honest.
+  if (!slug) {
+    return (
+      <div className="font-mono text-tui-muted text-sm" role="alert">
+        <p className="text-tui-red">Missing blog slug.</p>
+      </div>
+    );
+  }
+
   if (state.status === "loading") {
     return (
       <div
@@ -218,10 +226,7 @@ export const BlogPost: React.FC = () => {
 
   if (state.status === "error") {
     return (
-      <div
-        className="font-mono text-tui-muted text-sm space-y-3"
-        role="alert"
-      >
+      <div className="font-mono text-tui-muted text-sm space-y-3" role="alert">
         <p className="text-tui-red">
           Could not load post <code>{slug}</code>.
         </p>
