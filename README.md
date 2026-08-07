@@ -4,7 +4,7 @@ A terminal-themed, single-page portfolio + blog built with React 19, TypeScript,
 Vite, and Framer Motion. MDX drives the blog so posts are authored as plain
 Markdown with React components mixed in.
 
-Live site: https://abhinavsrivastav.com
+Live site: https://abhinavrx.netlify.app
 
 ## Features
 
